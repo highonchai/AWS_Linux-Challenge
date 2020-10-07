@@ -7,7 +7,7 @@ prices=(1 2 3 4 5)
 
 purchase() {
 
-read -p "How many would you like? >> " quantity
+read -p "How many ${products[$(($product - 1))]} would you like? >> " quantity
 cart_products+=${products[$(($product - 1))]}
 cart_quantity+=$quantity
 echo "$quantity ${products[$(($product - 1))]} added to your cart"
