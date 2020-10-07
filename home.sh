@@ -34,12 +34,13 @@ echo "You can join today! Choose now to become a member!!!"
 echo ""
 echo "To join now, Please enter, your first and last name, phone number"
 echo "and address below."
-sleep 3
+echo " "
+#sleep 3
 echo ""
 echo ""
-read -p "What is your first name? >> " first_name
-read -p "what is your last name? >> " last_name
-read -p "what is your phone number? >> " Phone_number 
-read -p "what is your address? >> " address
-echo "" 
-echo "Thank you for joining, $first_name $last_name"
+#read -p "What is your first name? >> " first_name
+#read -p "what is your last name? >> " last_name
+#read -p "what is your phone number? >> " Phone_number 
+#read -p "what is your address? >> " address
+#echo "" 
+#echo "Thank you for joining, $first_name $last_name"

@@ -27,27 +27,58 @@ products=(Greens Beans Potatoes Tomatoes Corn)
 prices=(1 2 3 4 5)
 #member=()
 email=()
-cart_products=(1)
-cart_quantity=(1)
-
-cart_products[0]
-cart_quantity[0]
+cart_products=()
+cart_quantity=()
 # Declared Variables:
 
 
 # Functions
 # Home Page Function
-home() { }
+home() {
+./home.sh
+ }
 
 # Checkout Function
-checkout() { }
+#checkout() { 
+#./checkout.sh
+#}
 
 # Membership/Promo Page Function
-membership() { }
+#membership() {
+#./membership.sh
+# }
 
 # Email
-email() {
- }
+#email() {
+#./email.sh
+#}
+
+# Purchase Function
+purchase() {
+
+read -p "How many ${products[$(($product - 1))]} would you like? >> " quantity
+cart_products+=${products[$(($product - 1))]}
+cart_quantity+=$quantity
+echo "$quantity ${products[$(($product - 1))]} added to your cart"
+sleep 0.25
+read -p "Would you like to add more items? (yes/no) >> " more
+
+if [ $more = "yes" ]
+then
+#(loop back to beginning of the process)
+return
+elif [ $more = "no" ]
+then
+clear
+echo "Taking you to the checkout page!"
+#loading()
+#checkout()
+else
+echo "Invalid response. Returning to menu"
+return
+fi
+}
+
 
 # Start Program
 # Notes:
@@ -55,10 +86,10 @@ email() {
 # 
 
 # Establishes while loop to exit program at the end or invalid response
-while true; do
+#while true; do
 
 # Runs the Home Function to start the program
-Home()
+home
 
 # Prompts the user to join membership
 read -p "Would you like to join our membership program? (yes/no) >> " member
@@ -66,82 +97,68 @@ read -p "Would you like to join our membership program? (yes/no) >> " member
 if [ $member = "yes" ]
 then
 # Runs the Membership Function
-membership()
-read -p "What do you think? Still want to join? (yes/no) >> " membership
+echo "Yes, you want to be a member!"
+#membership()
+#read -p "What do you think? Still want to join? (yes/no) >> " membership
 
-if [ $membership = "yes" ]
-then
-echo "That's great! Please enter your email address to join"
-read -p "Enter Email: >> " email
+#if [ $membership = "yes" ]
+#then
+#echo "That's great! Please enter your email address to join"
+#read -p "Enter Email: >> " email
 
 # If we want to display a different homepage add email to member array
 
-email()
-echo "Welcome to the NCI Story Family! A promo code has just been emailed to you!"
+#email()
+#echo "Welcome to the NCI Story Family! A promo code has just been emailed to you!"
 
-Home()
-
-else
-echo "No worries! We still love you. Returning you to the home screen"
-sleep 1
-Home()
-fi
+home
 
 else
 echo "No worries! We still love you. Returning you to the home screen"
 sleep 1
-Home()
+home
 fi
 
 # Asks the user if they would like to add items or purchase
 # Purchasing Items loop
 more="yes"
 until [ $more = "no" ]; do
-read -p "What would you like to add to your cart?"
+echo " "
+clear
+home
+echo " "
+echo "What would you like to add to your cart?"
 read -p "Please select a Product ID: >> " product
 
 case $product in
 1)
-echo "How many would you like? >> " quantity
-echo "$quantity $product added to your cart"
-cart_products+=$product
-cart_quantity+=$quantity
-sleep 0.25
-read -p "Would you like to add more items? (yes/no) >> " more
-
-if [ $more = "yes" ]
-then
-#(loop back to beginning of the process)
-continue
-
-elif [ $more = "no" ]
-then
-clear
-echo "Taking you to the checkout page!"
-loading()
-checkout()
-exit
-else
-echo "Invalid response. Returning to menu"
-continue
-exit
-fi
-
-done
+purchase
 ;;
 2)
-purchase()
+#echo "2"
+purchase
 ;;
 3)
-purchase()
+#echo "3"
+purchase
 ;;
 4)
-purchase()
+#echo "4"
+purchase
 ;;
 5)
-purchase()
+#echo "5"
+purchase
 ;;
 esac
 
 done
+for n in "${cart_products[@]}"; do
+printf "$n "
+done
+printf "\n"
 
+for n in "${cart_quantity[@]}"; do
+printf "$n "
+done
+printf "\n"
