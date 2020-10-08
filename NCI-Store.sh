@@ -39,9 +39,9 @@ home() {
  }
 
 # Checkout Function
-#checkout() { 
-#./checkout.sh
-#}
+checkout() { 
+./store_chout.sh
+}
 
 # Membership/Promo Page Function
 #membership() {
@@ -52,6 +52,11 @@ home() {
 #email() {
 #./email.sh
 #}
+
+#Loading Screen
+loading() {
+sh dna.sh
+}
 
 # Purchase Function
 purchase() {
@@ -162,3 +167,8 @@ for n in "${cart_quantity[@]}"; do
 printf "$n "
 done
 printf "\n"
+
+pagename="CHECK-OUT"
+loading
+
+checkout
