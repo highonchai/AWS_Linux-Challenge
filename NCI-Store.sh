@@ -29,6 +29,7 @@ prices=(1 2 3 4 5)
 email=()
 cart_products=()
 cart_quantity=()
+cart_price=()
 # Declared Variables:
 
 
@@ -39,9 +40,43 @@ home() {
  }
 
 # Checkout Function
-#checkout() { 
-#./checkout.sh
-#}
+checkout() { 
+
+
+echo "⢀⡴⠑⡄⠀⠀⠀⠀⠀⠀⠀⣀⣀⣤⣤⣤⣀⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀"
+echo "⠸⡇⠀⠿⡀⠀⠀⠀⣀⡴⢿⣿⣿⣿⣿⣿⣿⣿⣷⣦⡀⠀⠀SOMEBODY ONCE TOLD ME, YOU WERE READY TO CHECK OUT"
+echo "⠀⠀⠑⢄⣠⠾⠁⣀⣄⡈⠙⣿⣿⣿⣿⣿⣿⣿⣿⣆⠀⠀⠀⠀⠀⠀                                            ⠀⠀ "
+echo "⠀⠀  ⢀⡀⠁⠀⠀⠈⠙⠛⠂⠈⣿⣿⣿⣿⣿⠿⡿⢿⣆⠀⠀⠀⠀⠀⠀                                            "
+echo " ⠀ ⢀⡾⣁⣀⠀⠴⠂⠙⣗⡀⠀⢻⣿⣿⠭⢤⣴⣦⣤⣹⠀⠀⠀⢀⢴⣶⣆                                           "
+echo "  ⢀⣾⣿⣿⣿⣷⣮⣽⣾⣿⣥⣴⣿⣿⡿⢂⠔⢚⡿⢿⣿⣦⣴⣾⠁⠸⣼⡿                                           "
+echo " ⢀⡞⠁⠙⠻⠿⠟⠉⠀⠛⢹⣿⣿⣿⣿⣿⣌⢤⣼⣿⣾⣿⡟⠉⠀⠀⠀⠀⠀                                           "
+echo "⠀⣾⣷⣶⠇⠀⠀⣤⣄⣀⡀⠈⠻⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡇⠀⠀⠀⠀⠀⠀                                           "
+echo " ⠉⠈⠉⠀⠀⢦⡈⢻⣿⣿⣿⣶⣶⣶⣶⣤⣽⡹⣿⣿⣿⣿⡇⠀⠀⠀⠀⠀⠀                                           "
+echo "⠀⠀⠀    ⠉⠲⣽⡻⢿⣿⣿⣿⣿⣿⣿⣷⣜⣿⣿⣿⡇⠀⠀⠀⠀⠀⠀                                           "
+echo "⠀⠀⠀     ⢸⣿⣿⣷⣶⣮⣭⣽⣿⣿⣿⣿⣿⣿⣿⠀⠀⠀⠀⠀⠀⠀                                           "
+echo "⠀⠀   ⠀⣀⣀⣈⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠇⠀⠀⠀⠀⠀⠀⠀                                           "
+echo "⠀   ⠀⠀⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠃⠀⠀⠀⠀⠀⠀⠀⠀                                           "
+echo "⠀ ⠀ ⠀ ⠀⠹⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⠟⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀                                           "
+echo "   ⠀ ⠀ ⠀⠀⠉⠛⠻⠿⠿⠿⠿⠛"
+echo " "
+sleep 3 
+echo "------------------------------  CHECKOUT  -------------------------------"
+echo " "
+echo "${cart_products[0]} -- ${cart_quantity[0]} ............................${cart_price[0]}"
+echo " "
+echo "${cart_products[1]} -- ${cart_quantity[1]} ............................${cart_price[1]}"
+echo " "
+echo "------------------------------- SUBTOTAL --------------------------------"
+echo "                                                                 subtotal"
+echo " "
+echo " (Shipping chose)  ...............................................  shipping"
+echo " "
+echo " Tax  ..............................................................  tax"
+echo " "
+echo "-------------------------------- TOTAL ----------------------------------"
+echo "                    TOTAL=(sum of all prices= subt) + ship + tax                   "
+#./store_chout.sh
+}
 
 # Membership/Promo Page Function
 #membership() {
@@ -53,12 +88,18 @@ home() {
 #./email.sh
 #}
 
+#Loading Screen
+loading() {
+sh dna.sh
+}
+
 # Purchase Function
 purchase() {
 
 read -p "How many ${products[$(($product - 1))]} would you like? >> " quantity
-cart_products+=${products[$(($product - 1))]}
-cart_quantity+=$quantity
+cart_products=(${cart_products[@]} ${products[$(($product - 1))]})
+cart_quantity=(${cart_quantity[@]} $quantity)
+cart_price=(${cart_price[@]} ${prices[$(($product - 1))]})
 echo "$quantity ${products[$(($product - 1))]} added to your cart"
 sleep 0.25
 read -p "Would you like to add more items? (yes/no) >> " more
@@ -151,8 +192,8 @@ purchase
 purchase
 ;;
 esac
-
 done
+
 for n in "${cart_products[@]}"; do
 printf "$n "
 done
@@ -162,3 +203,8 @@ for n in "${cart_quantity[@]}"; do
 printf "$n "
 done
 printf "\n"
+
+export pagename="CHECK-OUT"
+#loading
+
+checkout
