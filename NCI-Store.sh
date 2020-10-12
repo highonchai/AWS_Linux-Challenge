@@ -61,10 +61,12 @@ echo "   ⠀ ⠀ ⠀⠀⠉⠛⠻⠿⠿⠿⠿⠛"
 echo " "
 sleep 3 
 echo "------------------------------  CHECKOUT  -------------------------------"
+len=${#cart_products[@]}
+for ((n=0; n<$len; n++));
+do
+echo "${cart_products[$n]} -- ${cart_quantity[$n]} ............................${cart_price[$n]}"
 echo " "
-echo "${cart_products[0]} -- ${cart_quantity[0]} ............................${cart_price[0]}"
-echo " "
-echo "${cart_products[1]} -- ${cart_quantity[1]} ............................${cart_price[1]}"
+done 
 echo " "
 echo "------------------------------- SUBTOTAL --------------------------------"
 echo "                                                                 subtotal"
