@@ -81,9 +81,9 @@ echo "                    TOTAL=(sum of all prices= subt) + ship + tax          
 }
 
 # Membership/Promo Page Function
-#membership() {
-#./membership.sh
-# }
+membership() {
+./Store_Project.sh
+ }
 
 # Email
 #email() {
@@ -141,8 +141,9 @@ if [ $member = "yes" ]
 then
 # Runs the Membership Function
 echo "Yes, you want to be a member!"
-#membership()
-#read -p "What do you think? Still want to join? (yes/no) >> " membership
+
+membership
+read -p "What do you think? Still want to join? (yes/no) >> " membership
 
 #if [ $membership = "yes" ]
 #then
