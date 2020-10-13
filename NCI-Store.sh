@@ -99,9 +99,25 @@ sh dna.sh
 purchase() {
 
 read -p "How many ${products[$(($product - 1))]} would you like? >> " quantity
+
+x=1000
+len_array=${#cart_products[@]}
+for ((n=0; n<$len_array; n++)); do
+if [[ $cart_products[$n] == ${products[$(($product - 1))]} ]]; then
+x=$n
+break
+fi
+done
+echo "$x"
+
+if [[ "$x" -ne "1000" ]]; then
+cart_quantity[$x]= $(( $quantity + ${cart_quantity[$x]} ))
+else
 cart_products=(${cart_products[@]} ${products[$(($product - 1))]})
 cart_quantity=(${cart_quantity[@]} $quantity)
 cart_price=(${cart_price[@]} ${prices[$(($product - 1))]})
+fi
+
 echo "$quantity ${products[$(($product - 1))]} added to your cart"
 sleep 0.25
 read -p "Would you like to add more items? (yes/no) >> " more
