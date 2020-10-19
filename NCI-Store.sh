@@ -87,7 +87,7 @@ membership() {
 
 # Email
 #email() {
-#./email.sh
+#./login.sh
 #}
 
 #Loading Screen
@@ -163,9 +163,7 @@ read -p "What do you think? Still want to join? (yes/no) >> " membership
 
 #if [ $membership = "yes" ]
 #then
-#echo "That's great! Please enter your email address to join"
-#read -p "Enter Email: >> " email
-
+#email
 # If we want to display a different homepage add email to member array
 
 #email()
