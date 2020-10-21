@@ -25,13 +25,14 @@ clear
 # Declared Arrays:
 products=(Greens Beans Potatoes Tomatoes Corn)
 prices=(1 2 3 4 5)
+cart=(0 0 0 0 0)
+quant=(0 0 0 0 0)
 #member=()
 email=()
 cart_products=()
 cart_quantity=()
 cart_price=()
-# Declared Variables:
-
+# Declared Variables
 
 # Functions
 # Home Page Function
@@ -61,10 +62,10 @@ echo "   ⠀ ⠀ ⠀⠀⠉⠛⠻⠿⠿⠿⠿⠛"
 echo " "
 sleep 3 
 echo "------------------------------  CHECKOUT  -------------------------------"
-len=${#cart_products[@]}
+len=${#cart[@]}
 for ((n=0; n<$len; n++));
 do
-echo "${cart_products[$n]} -- ${cart_quantity[$n]} ............................${cart_price[$n]}"
+echo "${cart_products[$n]} -- ${cart_quantity[$n]} ............................$(( ${cart_price[$n]} * ${cart_quantity[n]} ))"
 echo " "
 done 
 echo " "
@@ -88,7 +89,6 @@ membership() {
 # Email
 #email() {
 #./login.sh
-#}
 
 #Loading Screen
 loading() {
@@ -100,23 +100,61 @@ purchase() {
 
 read -p "How many ${products[$(($product - 1))]} would you like? >> " quantity
 
-x=1000
-len_array=${#cart_products[@]}
-for ((n=0; n<$len_array; n++)); do
-if [[ $cart_products[$n] == ${products[$(($product - 1))]} ]]; then
-x=$n
-break
-fi
-done
-echo "$x"
+case $product in
+1)
+(( quant[0]+=$quantity ))
+cart[0]=1
+;;
+2)
+(( quant[1]+=$quantity ))
+cart[1]=1
+;;
+3)
+(( quant[2]+=$quantity ))
+cart[2]=1
+;;
+4)
+(( quant[3]+=$quantity ))
+cart[3]=1
+;;
+5)
+(( quant[4]+=$quantity ))
+cart[4]=1
+;;
+esac
 
-if [[ "$x" -ne "1000" ]]; then
-cart_quantity[$x]= $(( $quantity + ${cart_quantity[$x]} ))
-else
-cart_products=(${cart_products[@]} ${products[$(($product - 1))]})
-cart_quantity=(${cart_quantity[@]} $quantity)
-cart_price=(${cart_price[@]} ${prices[$(($product - 1))]})
-fi
+for n in "${cart[@]}"; do
+printf "$n "
+done
+printf "\n"
+
+for n in "${quant[@]}"; do
+printf "$n "
+done
+printf "\n"
+sleep 1
+
+
+#### TO BE DELETED
+#x=1000
+#len_array=${#cart_products[@]}
+#for ((n=0; n<$len_array; n++)); do
+#if [[ $cart_products[$n] == ${products[$(($product - 1))]} ]]; then
+#x=$n
+#break
+#fi
+#done
+#echo "$x"
+
+#if [[ "$x" -ne "1000" ]]; then
+#cart_quantity[$x]= $(( $quantity + ${cart_quantity[$x]} ))
+#else
+#quantity
+#cart_products=(${cart_products[@]} ${products[$(($product - 1))]})
+#cart_quantity=(${cart_quantity[@]} $quantity)
+#cart_price=(${cart_price[@]} ${prices[$(($product - 1))]})
+#fi
+##########
 
 echo "$quantity ${products[$(($product - 1))]} added to your cart"
 sleep 0.25
@@ -126,8 +164,42 @@ if [ $more = "yes" ]
 then
 #(loop back to beginning of the process)
 return
+
 elif [ $more = "no" ]
 then
+x=0
+for n in "${cart[@]}"; do
+# If the array variable is set to "1" then it adds to the cart arrays based on the index value of "x"
+if [ $n = 1 ]
+then
+cart_products=(${cart_products[@]} ${products[$x]}) 
+cart_quantity=(${cart_quantity[@]} ${quant[$x]})
+cart_price=(${cart_price[@]} ${prices[$x]})
+x=`expr $x + 1` #increments counter to index correctly when adding to array
+else
+x=`expr $x + 1` #increments counter to index correctly when adding to array
+fi
+done
+
+#### TO BE DELETED. USED FOR TESTING. VERIFIES CART ARRAYS
+for n in "${cart_products[@]}"; do
+printf "$n "
+done
+printf "\n"
+#sleep 2
+
+for n in "${cart_quantity[@]}"; do
+printf "$n "
+done
+printf "\n"
+
+for n in "${cart_price[@]}"; do
+printf "$n "
+done
+printf "\n"
+sleep 1
+#####################
+
 clear
 echo "Taking you to the checkout page!"
 #loading()
@@ -137,15 +209,6 @@ echo "Invalid response. Returning to menu"
 return
 fi
 }
-
-
-# Start Program
-# Notes:
-# Clear the screen when you need to loop
-# 
-
-# Establishes while loop to exit program at the end or invalid response
-#while true; do
 
 # Runs the Home Function to start the program
 home
@@ -193,33 +256,19 @@ case $product in
 purchase
 ;;
 2)
-#echo "2"
 purchase
 ;;
 3)
-#echo "3"
 purchase
 ;;
 4)
-#echo "4"
 purchase
 ;;
 5)
-#echo "5"
 purchase
 ;;
 esac
 done
-
-for n in "${cart_products[@]}"; do
-printf "$n "
-done
-printf "\n"
-
-for n in "${cart_quantity[@]}"; do
-printf "$n "
-done
-printf "\n"
 
 export pagename="CHECK-OUT"
 #loading
