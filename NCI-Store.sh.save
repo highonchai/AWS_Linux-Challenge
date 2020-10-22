@@ -44,14 +44,10 @@ home_fast() {
 sh home_fast.sh
 }
 
-promo() {
-./promocodelogic.sh
-}
-
 # Checkout Function
 checkout() { 
 
-printf "\32[32m"
+printf "\32[42m"
 echo "⢀⡴⠑⡄⠀⠀⠀⠀⠀⠀⠀⣀⣀⣤⣤⣤⣀⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀"
 echo "⠸⡇⠀⠿⡀⠀⠀⠀⣀⡴⢿⣿⣿⣿⣿⣿⣿⣿⣷⣦⡀⠀⠀SOMEBODY ONCE TOLD ME, YOU WERE READY TO CHECK OUT"
 echo "⠀⠀⠑⢄⣠⠾⠁⣀⣄⡈⠙⣿⣿⣿⣿⣿⣿⣿⣿⣆⠀⠀⠀⠀⠀⠀                                            ⠀⠀ "
@@ -100,9 +96,8 @@ sh MSP2.sh
 }
 
 # Email
-email() {
-./email.sh
-}
+#email() {
+#./login.sh
 
 #Loading Screen
 loading() {
@@ -218,25 +213,24 @@ echo "Yes, you want to be a member!"
 
 # Runs the membership page function
 membership
-printf "\33[0m"
+
 read -p "What do you think? Still want to join? (yes/no) >> " mem
-	
-	if [ $mem = "yes" ]
-	then
 
-	email
-	echo "Welcome to the NCI Story Family! A promo code has just been emailed to you!"
+if [ $mem = "yes" ]
+then
 
-	membership_congrats
+email
+# If we want to display a different homepage add email to member array
 
-	sleep 3
-	echo "Taking you back to the homepage now"
-	home_fast
-	else
-	sleep 2
-	echo "No worries! Taking you back to the homepage now"
-	home_fast
-	fi
+#email()
+echo "Welcome to the NCI Story Family! A promo code has just been emailed to you!"
+
+membership_congrats
+
+sleep 3
+echo "Taking you back to the homepage now"
+
+home_fast
 
 else
 echo "No worries! We still love you. Returning you to the home screen"
@@ -274,10 +268,7 @@ purchase
 esac
 done
 
-#export pagename="CHECK-OUT"
+export pagename="CHECK-OUT"
 #loading
 
 checkout
-promo
-
-
