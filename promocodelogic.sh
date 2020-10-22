@@ -7,8 +7,9 @@ promocodelogic(){
         # If it's the correct promo code, the loop will break.
         if [ $codeprompt == 'Y' ] || [ $codeprompt == 'y' ] 
         then
-            echo "Moving to the promo code page!"
-            read -p "Enter your promo code: " promocode
+	    echo "Moving to the promo code page!"
+            clear
+	    read -p "Enter your promo code: " promocode
             if [ $promocode == '1234' ] 
             then
                 echo "Valid promo code! Applying the discount now"
