@@ -1,5 +1,5 @@
 #!/bin/bash
-clear
+
 echo "🍌🍎🍌🍎🍌🍎🍌🍎🍌🍎🍌🍎🍌🍎🍌🍎🍌🍎🍌🍎🍌🍎🍌🍎🍌🍎🍌🍎🍌🍎🍌🍎🍌🍎🍌🍎"
 echo "                                                                        "
 printf "\33[32m"
@@ -51,4 +51,3 @@ echo "Our membership program allows customers to recieve 10% off $20"
 echo "puchase on any combiantion of products"
 echo " "
 echo "🍌🍎🍌🍎🍌🍎🍌🍎🍌🍎🍌🍎🍌🍎🍌🍎🍌🍎🍌🍎🍌🍎🍌🍎🍌🍎🍌🍎🍌🍎🍌🍎🍌🍎🍌🍎"
-echo " "
