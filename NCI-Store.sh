@@ -83,7 +83,7 @@ echo "                    TOTAL=(sum of all prices= subt) + ship + tax          
 
 # Membership/Promo Page Function
 membership() {
-./Store_Project.sh
+sh MSP1.sh
  }
 
 # Email
