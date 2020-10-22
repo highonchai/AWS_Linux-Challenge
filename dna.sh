@@ -1,7 +1,7 @@
 #!/bin/bash
 
-echo "Taking you to $($pagename)"
-
+echo "Taking you to the checkout page!"
+echo " "
 echo "▒▒▒▒          ▒▒    ▒▒▒▒"
 sleep .25
 echo "  ▒▒        ▒▒▒▒    ▒▒  "

@@ -50,8 +50,9 @@ promo() {
 
 # Checkout Function
 checkout() { 
+clear
 
-printf "\32[32m"
+#printf "\32[32m"
 echo "⢀⡴⠑⡄⠀⠀⠀⠀⠀⠀⠀⣀⣀⣤⣤⣤⣀⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀"
 echo "⠸⡇⠀⠿⡀⠀⠀⠀⣀⡴⢿⣿⣿⣿⣿⣿⣿⣿⣷⣦⡀⠀⠀SOMEBODY ONCE TOLD ME, YOU WERE READY TO CHECK OUT"
 echo "⠀⠀⠑⢄⣠⠾⠁⣀⣄⡈⠙⣿⣿⣿⣿⣿⣿⣿⣿⣆⠀⠀⠀⠀⠀⠀                                            ⠀⠀ "
@@ -70,10 +71,10 @@ echo "   ⠀ ⠀ ⠀⠀⠉⠛⠻⠿⠿⠿⠿⠛"
 echo " "
 sleep 3 
 echo "------------------------------  CHECKOUT  -------------------------------"
-len=${#cart[@]}
+len=${#cart_products[@]}
 for ((n=0; n<$len; n++));
 do
-echo "${cart_products[$n]} -- ${cart_quantity[$n]} ............................$(( ${cart_price[$n]} * ${cart_quantity[n]} ))"
+echo "${cart_products[$n]} -- ${cart_quantity[$n]} ............................${cart_price[$n]}"
 echo " "
 done 
 echo " "
@@ -86,6 +87,8 @@ echo " Tax  ..............................................................  tax"
 echo " "
 echo "-------------------------------- TOTAL ----------------------------------"
 echo "                    TOTAL=(sum of all prices= subt) + ship + tax                   "
+echo " "
+echo " "
 #./store_chout.sh
 }
 
@@ -193,7 +196,7 @@ sleep 1
 #####################
 
 clear
-echo "Taking you to the checkout page!"
+#echo "Taking you to the checkout page!"
 #loading()
 #checkout()
 else
@@ -205,6 +208,8 @@ fi
 ###########################################################
 ##### PROGRAM START #######################################
 ##########################################################
+while true
+do
 # Runs the Home Function to start the program
 home
 
@@ -274,10 +279,38 @@ purchase
 esac
 done
 
-#export pagename="CHECK-OUT"
-#loading
+#loading page
+loading
 
+#checkout page
 checkout
+
+#promo process
 promo
+
+read -p "Confirm purchase? (y/n) >> " confirm_purchase
+
+if [ $confirm_purchase = 'y' ] || [ $confirm_purchase = 'Y' ]
+then
+clear
+echo "Congrats on your order!"
+fi
+
+
+echo " "
+read -p "Would you like to return to the homepage and continue shopping? (y/n) >> " cont
+if [ $cont = 'y' ] || [ $cont = 'Y' ]
+then
+#continue
+echo "Returning you to the homepage..."
+sleep 1
+else
+echo " "
+echo "Thank you for shopping at the NCI Market! Hope to see you again soon!"
+echo " "
+exit
+fi
+done
+
 
 
