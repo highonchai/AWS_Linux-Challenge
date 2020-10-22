@@ -40,6 +40,10 @@ home() {
 ./home.sh
  }
 
+home_fast() {
+./home_fast.sh
+}
+
 # Checkout Function
 checkout() { 
 
@@ -134,28 +138,6 @@ done
 printf "\n"
 sleep 1
 
-
-#### TO BE DELETED
-#x=1000
-#len_array=${#cart_products[@]}
-#for ((n=0; n<$len_array; n++)); do
-#if [[ $cart_products[$n] == ${products[$(($product - 1))]} ]]; then
-#x=$n
-#break
-#fi
-#done
-#echo "$x"
-
-#if [[ "$x" -ne "1000" ]]; then
-#cart_quantity[$x]= $(( $quantity + ${cart_quantity[$x]} ))
-#else
-#quantity
-#cart_products=(${cart_products[@]} ${products[$(($product - 1))]})
-#cart_quantity=(${cart_quantity[@]} $quantity)
-#cart_price=(${cart_price[@]} ${prices[$(($product - 1))]})
-#fi
-##########
-
 echo "$quantity ${products[$(($product - 1))]} added to your cart"
 sleep 0.25
 read -p "Would you like to add more items? (yes/no) >> " more
@@ -210,6 +192,9 @@ return
 fi
 }
 
+###########################################################
+##### PROGRAM START #######################################
+##########################################################
 # Runs the Home Function to start the program
 home
 
@@ -232,12 +217,12 @@ read -p "What do you think? Still want to join? (yes/no) >> " membership
 #email()
 #echo "Welcome to the NCI Story Family! A promo code has just been emailed to you!"
 
-home
+home_fast
 
 else
 echo "No worries! We still love you. Returning you to the home screen"
 sleep 1
-home
+home_fast
 fi
 
 # Asks the user if they would like to add items or purchase
@@ -246,7 +231,7 @@ more="yes"
 until [ $more = "no" ]; do
 echo " "
 clear
-home
+home_fast
 echo " "
 echo "What would you like to add to your cart?"
 read -p "Please select a Product ID: >> " product
