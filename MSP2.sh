@@ -14,11 +14,10 @@ echo "                       Weclome to the NFM Family!                       "
 echo "                   You are Offically a NFM Gold Member!                 "
 echo "                     Enjoy Incredible Perks & Deals                     "
 echo "                                                                        "
-sleep 5
+sleep 2
 printf "\33[33m"
 echo "************************************************************************"
 echo "*  NCI MARKET GOLD MEMBER                                              *"
-sleep 2
 printf "\33[32m"
 echo "*                                                                      *"
 echo "*                    ⢀⡴⠑⡄⠀⠀⠀⠀⠀⠀⠀⣀⣀⣤⣤⣤⣀⡀⠀⠀⠀⠀                            *"

@@ -41,7 +41,7 @@ home() {
  }
 
 home_fast() {
-./home_fast.sh
+sh home_fast.sh
 }
 
 # Checkout Function
@@ -85,10 +85,15 @@ echo "                    TOTAL=(sum of all prices= subt) + ship + tax          
 #./store_chout.sh
 }
 
-# Membership/Promo Page Function
+# Membership/Promo Information Page Function
 membership() {
 sh MSP1.sh
  }
+
+# Membership Congratulation Page Function
+membership_congrats() {
+sh MSP2.sh
+}
 
 # Email
 #email() {
@@ -201,21 +206,29 @@ home
 # Prompts the user to join membership
 read -p "Would you like to join our membership program? (yes/no) >> " member
 
+# Check's user's response 
 if [ $member = "yes" ]
 then
-# Runs the Membership Function
 echo "Yes, you want to be a member!"
 
+# Runs the membership page function
 membership
-read -p "What do you think? Still want to join? (yes/no) >> " membership
 
-#if [ $membership = "yes" ]
+#read -p "What do you think? Still want to join? (yes/no) >> " mem
+
+#if [ $mem = "yes" ]
 #then
+#clear
 #email
 # If we want to display a different homepage add email to member array
 
 #email()
-#echo "Welcome to the NCI Story Family! A promo code has just been emailed to you!"
+echo "Welcome to the NCI Story Family! A promo code has just been emailed to you!"
+
+membership_congrats
+
+sleep 3
+echo "Taking you back to the homepage now"
 
 home_fast
 
