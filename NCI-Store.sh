@@ -45,36 +45,6 @@ home_fast() {
 sh home_fast.sh
 }
 
-promo() {
-        while true
-        do
-        #Prompt the user for a promo code
-        read -p "Would you like to enter a promo code? [Y/N] >> " codeprompt
-        # If it's the correct promo code, the loop will break.
-        if [ $codeprompt == 'Y' ] || [ $codeprompt == 'y' ] 
-        then
-	    echo "Moving to the promo code page!"
-            clear
-	    read -p "Enter your promo code: " promocode
-            if [ $promocode == '1234' ] 
-            then
-                echo "Valid promo code! Applying the discount now"
-                checkout_discount
-                return
-            else
-            echo "That's not a valid promo code. Please try again" 
-            fi
-        elif [ $codeprompt == 'N' ] || [ $codeprompt == 'n' ]
-        then
-            echo "Moving to checkout."
-		checkout
-            return
-        else
-            echo "Not a valid option. Try again"
-        fi
-        done
-}
-
 # Checkout Function
 checkout() { 
 clear
@@ -98,40 +68,45 @@ echo "   ⠀ ⠀ ⠀⠀⠉⠛⠻⠿⠿⠿⠿⠛"
 echo " "
 sleep 3 
 echo "------------------------------  CHECKOUT  -------------------------------"
-total = `expr $subtotal + 3`
-promo_total = `expr $total * .9`
+total=$(( $sub_total + 3 ))
+pro=0.1
+promo_discount=$(echo $total*$pro | bc)
+promo_total=$(echo $total - $promo_discount | bc )
 len=${#cart_products[@]}
 for ((n=0; n<$len; n++));
 do
-echo "${cart_products[$n]} -- ${cart_quantity[$n]} .......................................................$ $(( expr ${cart_price[$n]} * ${cart_quantity[$n]} )).00"
+echo "${cart_products[$n]} -- ${cart_quantity[$n]} .......................................................$ $(( ${cart_price[$n]}*${cart_quantity[$n]} )).00"
 echo " "
 echo "--------------------------------------------------------------------------"
 echo " "
-done 
+done
 }
 
-promo_checkout() {
+checkout-p() {
+
 echo "------------------------------- SUBTOTAL --------------------------------"
 echo "                                                                 $sub_total"
 echo " "
-echo " (Shipping Rate)  ...............................................  $3.00"
+echo " (Shipping Rate)  ............................................... $ 3.00"
 echo " "
-echo " (Promo Code: 10% off) ................................................-$ $promo_total"
+echo " (Promo Code: 10% off) ................................................-$ $promo_discount"
 echo " "
 echo "-------------------------------- TOTAL ----------------------------------"
-echo "                    TOTAL= $total                   "
+echo "                    TOTAL= $ $promo_total                   "
 echo " "
 echo " "
 }
 
-normal_checkout() {
+checkout-n() {
 echo "------------------------------- SUBTOTAL --------------------------------"
-echo "                                                                 $sub_total"
+echo "                                                            $ $sub_total"
 echo " "
-echo " (Shipping Rate)  ...............................................  $3.00"
+echo " (Shipping Rate)  ............................................... $ 3.00"
+echo " "
+echo " (Promo Code: 10% off) ................................................-$ $promo_discount"
 echo " "
 echo "-------------------------------- TOTAL ----------------------------------"
-echo "                    TOTAL= $total                   "
+echo "                    TOTAL= $ $promo_total                   "
 echo " "
 echo " "
 }
@@ -214,7 +189,7 @@ then
 cart_products=(${cart_products[@]} ${products[$x]}) 
 cart_quantity=(${cart_quantity[@]} ${quant[$x]})
 cart_price=(${cart_price[@]} ${prices[$x]})
-sub_total+=(expr $sub_total + ${prices[$x]} * ${quant[$x]})
+sub_total=$(( $sub_total + ${prices[$x]}*${quant[$x]} ))
 
 x=`expr $x + 1` #increments counter to index correctly when adding to array
 else
@@ -223,25 +198,23 @@ fi
 done
 
 
-
-
 #### TO BE DELETED. USED FOR TESTING. VERIFIES CART ARRAYS
-for n in "${cart_products[@]}"; do
-printf "$n "
-done
-printf "\n"
+#for n in "${cart_products[@]}"; do
+#printf "$n "
+#done
+#printf "\n"
 #sleep 2
 
-for n in "${cart_quantity[@]}"; do
-printf "$n "
-done
-printf "\n"
+#for n in "${cart_quantity[@]}"; do
+#printf "$n "
+#done
+#printf "\n"
 
-for n in "${cart_price[@]}"; do
-printf "$n "
-done
-printf "\n"
-sleep 1
+#for n in "${cart_price[@]}"; do
+#printf "$n "
+#done
+#printf "\n"
+#sleep 1
 #####################
 
 clear
@@ -253,6 +226,39 @@ echo "Invalid response. Returning to menu"
 return
 fi
 }
+
+promo() {
+        while true
+        do
+        #Prompt the user for a promo code
+        read -p "Would you like to enter a promo code? [Y/N] >> " codeprompt
+        # If it's the correct promo code, the loop will break.
+        if [ $codeprompt == 'Y' ] || [ $codeprompt == 'y' ] 
+        then
+	    echo "Moving to the promo code page!"
+            #clear
+	    read -p "Enter your promo code: " promocode
+            if [ $promocode == '1234' ] 
+            then
+                echo "Valid promo code! Applying the discount now"
+	checkout                
+	checkout-p
+                return
+            else
+            echo "That's not a valid promo code. Please try again" 
+            fi
+        elif [ $codeprompt == 'N' ] || [ $codeprompt == 'n' ]
+        then
+            echo "Moving to checkout."
+	checkout		
+	checkout-n
+            return
+        else
+            echo "Not a valid option. Try again"
+        fi
+        done
+}
+
 
 ###########################################################
 ##### PROGRAM START #######################################
@@ -280,15 +286,20 @@ read -p "What do you think? Still want to join? (yes/no) >> " mem
 
 	email
 	echo "Welcome to the NCI Story Family! A promo code has just been emailed to you!"
+	sleep 1
 
 	membership_congrats
 
 	sleep 3
+	echo " "
 	echo "Taking you back to the homepage now"
+	sleep 1
 	home_fast
 	else
 	sleep 2
+	echo " "
 	echo "No worries! Taking you back to the homepage now"
+	sleep 1
 	home_fast
 	fi
 
@@ -355,8 +366,10 @@ echo "Sounds good! We're pretty new at this, so we had to clear your cart. But r
 cart_products=()
 cart_quantity=()
 cart_price=()
+cart=(0 0 0 0 0)
+quant=(0 0 0 0 0)
 subtotal=0
-sleep 1
+sleep 2
 else
 echo " "
 echo "Thank you for shopping at the NCI Market! Hope to see you again soon!"
