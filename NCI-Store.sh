@@ -33,6 +33,7 @@ cart_products=()
 cart_quantity=()
 cart_price=()
 # Declared Variables
+subtotal=0
 
 # Functions
 # Home Page Function
@@ -71,25 +72,42 @@ echo "   ⠀ ⠀ ⠀⠀⠉⠛⠻⠿⠿⠿⠿⠛"
 echo " "
 sleep 3 
 echo "------------------------------  CHECKOUT  -------------------------------"
+total = `expr $subtotal + 3`
+promo_total = `expr $total * .9`
 len=${#cart_products[@]}
 for ((n=0; n<$len; n++));
 do
-echo "${cart_products[$n]} -- ${cart_quantity[$n]} .......................................................$ ${cart_price[$n]}.00"
+echo "${cart_products[$n]} -- ${cart_quantity[$n]} .......................................................$ $(( expr ${cart_price[$n]} * ${cart_quantity[$n]} )).00"
+echo " "
+echo "--------------------------------------------------------------------------"
 echo " "
 done 
-echo " "
+}
+
+promo_checkout() {
 echo "------------------------------- SUBTOTAL --------------------------------"
 echo "                                                                 $sub_total"
 echo " "
-echo " (Shipping chose)  ...............................................  shipping"
+echo " (Shipping Rate)  ...............................................  $3.00"
 echo " "
-echo " Tax  ..............................................................  tax"
+echo " (Promo Code: 10% off) ................................................-$ $promo_total"
 echo " "
 echo "-------------------------------- TOTAL ----------------------------------"
-echo "                    TOTAL=(sum of all prices= subt) + ship + tax                   "
+echo "                    TOTAL= $total                   "
 echo " "
 echo " "
-#./store_chout.sh
+}
+
+normal_checkout() {
+echo "------------------------------- SUBTOTAL --------------------------------"
+echo "                                                                 $sub_total"
+echo " "
+echo " (Shipping Rate)  ...............................................  $3.00"
+echo " "
+echo "-------------------------------- TOTAL ----------------------------------"
+echo "                    TOTAL= $total                   "
+echo " "
+echo " "
 }
 
 # Membership/Promo Information Page Function
@@ -170,7 +188,7 @@ then
 cart_products=(${cart_products[@]} ${products[$x]}) 
 cart_quantity=(${cart_quantity[@]} ${quant[$x]})
 cart_price=(${cart_price[@]} ${prices[$x]})
-sub_total=(${cart_price[@]/%/+})
+sub_total+=(expr $sub_total + ${prices[$x]} * ${quant[$x]})
 
 x=`expr $x + 1` #increments counter to index correctly when adding to array
 else
@@ -307,7 +325,11 @@ read -p "Would you like to return to the homepage and continue shopping? (y/n) >
 if [ $cont = 'y' ] || [ $cont = 'Y' ]
 then
 #continue
-echo "Returning you to the homepage..."
+echo "Sounds good! We're pretty new at this, so we had to clear your cart. But returning you to the homepage to shop or more items"
+cart_products=()
+cart_quantity=()
+cart_price=()
+subtotal=0
 sleep 1
 else
 echo " "
