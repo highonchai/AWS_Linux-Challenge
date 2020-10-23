@@ -68,10 +68,10 @@ echo "   ⠀ ⠀ ⠀⠀⠉⠛⠻⠿⠿⠿⠿⠛"
 echo " "
 sleep 3 
 echo "------------------------------  CHECKOUT  -------------------------------"
-total=$(( $subtotal + 3 ))
+total=$(( $sub_total + 3 ))
 pro=0.1
 promo_discount=$(echo $total*$pro | bc)
-promo_total=$(echo $total-$promo_discount | bc )
+promo_total=$(echo $total - $promo_discount | bc )
 len=${#cart_products[@]}
 for ((n=0; n<$len; n++));
 do
@@ -80,53 +80,26 @@ echo " "
 echo "--------------------------------------------------------------------------"
 echo " "
 done
-echo "------------------------------- SUBTOTAL --------------------------------"
-echo "                                                                $ $sub_total"
-echo " "
-echo " (Shipping Rate)  ...............................................  $ 3.00"
-echo " "
-echo "-------------------------------- TOTAL ----------------------------------"
-echo "                    TOTAL= $ $total                   "
-echo " "
-echo " " 
 }
 
-promo_checkout() {
-clear
+checkout-p() {
 
-#printf "\32[32m"
-echo "⢀⡴⠑⡄⠀⠀⠀⠀⠀⠀⠀⣀⣀⣤⣤⣤⣀⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀"
-echo "⠸⡇⠀⠿⡀⠀⠀⠀⣀⡴⢿⣿⣿⣿⣿⣿⣿⣿⣷⣦⡀⠀⠀SOMEBODY ONCE TOLD ME, YOU WERE READY TO CHECK OUT"
-echo "⠀⠀⠑⢄⣠⠾⠁⣀⣄⡈⠙⣿⣿⣿⣿⣿⣿⣿⣿⣆⠀⠀⠀⠀⠀⠀                                            ⠀⠀ "
-echo "⠀⠀  ⢀⡀⠁⠀⠀⠈⠙⠛⠂⠈⣿⣿⣿⣿⣿⠿⡿⢿⣆⠀⠀⠀⠀⠀⠀                                            "
-echo " ⠀ ⢀⡾⣁⣀⠀⠴⠂⠙⣗⡀⠀⢻⣿⣿⠭⢤⣴⣦⣤⣹⠀⠀⠀⢀⢴⣶⣆                                           "
-echo "  ⢀⣾⣿⣿⣿⣷⣮⣽⣾⣿⣥⣴⣿⣿⡿⢂⠔⢚⡿⢿⣿⣦⣴⣾⠁⠸⣼⡿                                           "
-echo " ⢀⡞⠁⠙⠻⠿⠟⠉⠀⠛⢹⣿⣿⣿⣿⣿⣌⢤⣼⣿⣾⣿⡟⠉⠀⠀⠀⠀⠀                                           "
-echo "⠀⣾⣷⣶⠇⠀⠀⣤⣄⣀⡀⠈⠻⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡇⠀⠀⠀⠀⠀⠀                                           "
-echo " ⠉⠈⠉⠀⠀⢦⡈⢻⣿⣿⣿⣶⣶⣶⣶⣤⣽⡹⣿⣿⣿⣿⡇⠀⠀⠀⠀⠀⠀                                           "
-echo "⠀⠀⠀    ⠉⠲⣽⡻⢿⣿⣿⣿⣿⣿⣿⣷⣜⣿⣿⣿⡇⠀⠀⠀⠀⠀⠀                                           "
-echo "⠀⠀⠀     ⢸⣿⣿⣷⣶⣮⣭⣽⣿⣿⣿⣿⣿⣿⣿⠀⠀⠀⠀⠀⠀⠀                                           "
-echo "⠀⠀   ⠀⣀⣀⣈⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠇⠀⠀⠀⠀⠀⠀⠀                                           "
-echo "⠀   ⠀⠀⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠃⠀⠀⠀⠀⠀⠀⠀⠀                                           "
-echo "⠀ ⠀ ⠀ ⠀⠹⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⠟⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀                                           "
-echo "   ⠀ ⠀ ⠀⠀⠉⠛⠻⠿⠿⠿⠿⠛"
-echo " "
-sleep 3 
-echo "------------------------------  CHECKOUT  -------------------------------"
-total=$(( $subtotal + 3 ))
-pro=0.1
-promo_discount=$(echo $total*$pro | bc)
-promo_total=$(echo $total-$promo_discount | bc )
-len=${#cart_products[@]}
-for ((n=0; n<$len; n++));
-do
-echo "${cart_products[$n]} -- ${cart_quantity[$n]} .......................................................$ $(( ${cart_price[$n]}*${cart_quan>
-echo " "
-echo "--------------------------------------------------------------------------"
-echo " "
-done
 echo "------------------------------- SUBTOTAL --------------------------------"
 echo "                                                                 $sub_total"
+echo " "
+echo " (Shipping Rate)  ............................................... $ 3.00"
+echo " "
+echo " (Promo Code: 10% off) ................................................-$ $promo_discount"
+echo " "
+echo "-------------------------------- TOTAL ----------------------------------"
+echo "                    TOTAL= $ $promo_total                   "
+echo " "
+echo " "
+}
+
+checkout-n() {
+echo "------------------------------- SUBTOTAL --------------------------------"
+echo "                                                            $ $sub_total"
 echo " "
 echo " (Shipping Rate)  ............................................... $ 3.00"
 echo " "
@@ -216,7 +189,7 @@ then
 cart_products=(${cart_products[@]} ${products[$x]}) 
 cart_quantity=(${cart_quantity[@]} ${quant[$x]})
 cart_price=(${cart_price[@]} ${prices[$x]})
-sub_total+=(expr $sub_total + ${prices[$x]} * ${quant[$x]})
+sub_total=$(( $sub_total + ${prices[$x]}*${quant[$x]} ))
 
 x=`expr $x + 1` #increments counter to index correctly when adding to array
 else
@@ -226,22 +199,22 @@ done
 
 
 #### TO BE DELETED. USED FOR TESTING. VERIFIES CART ARRAYS
-for n in "${cart_products[@]}"; do
-printf "$n "
-done
-printf "\n"
-sleep 2
+#for n in "${cart_products[@]}"; do
+#printf "$n "
+#done
+#printf "\n"
+#sleep 2
 
-for n in "${cart_quantity[@]}"; do
-printf "$n "
-done
-printf "\n"
+#for n in "${cart_quantity[@]}"; do
+#printf "$n "
+#done
+#printf "\n"
 
-for n in "${cart_price[@]}"; do
-printf "$n "
-done
-printf "\n"
-sleep 1
+#for n in "${cart_price[@]}"; do
+#printf "$n "
+#done
+#printf "\n"
+#sleep 1
 #####################
 
 clear
@@ -268,7 +241,8 @@ promo() {
             if [ $promocode == '1234' ] 
             then
                 echo "Valid promo code! Applying the discount now"
-                promo_checkout
+	checkout                
+	checkout-p
                 return
             else
             echo "That's not a valid promo code. Please try again" 
@@ -276,7 +250,8 @@ promo() {
         elif [ $codeprompt == 'N' ] || [ $codeprompt == 'n' ]
         then
             echo "Moving to checkout."
-		checkout
+	checkout		
+	checkout-n
             return
         else
             echo "Not a valid option. Try again"
@@ -391,8 +366,10 @@ echo "Sounds good! We're pretty new at this, so we had to clear your cart. But r
 cart_products=()
 cart_quantity=()
 cart_price=()
+cart=(0 0 0 0 0)
+quant=(0 0 0 0 0)
 subtotal=0
-sleep 1
+sleep 2
 else
 echo " "
 echo "Thank you for shopping at the NCI Market! Hope to see you again soon!"
