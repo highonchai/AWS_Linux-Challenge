@@ -85,7 +85,7 @@ done
 checkout-p() {
 
 echo "------------------------------- SUBTOTAL --------------------------------"
-echo "                                                                 $sub_total"
+echo "                                                                $ $sub_total"
 echo " "
 echo " (Shipping Rate)  ............................................... $ 3.00"
 echo " "
@@ -196,26 +196,6 @@ else
 x=`expr $x + 1` #increments counter to index correctly when adding to array
 fi
 done
-
-
-#### TO BE DELETED. USED FOR TESTING. VERIFIES CART ARRAYS
-#for n in "${cart_products[@]}"; do
-#printf "$n "
-#done
-#printf "\n"
-#sleep 2
-
-#for n in "${cart_quantity[@]}"; do
-#printf "$n "
-#done
-#printf "\n"
-
-#for n in "${cart_price[@]}"; do
-#printf "$n "
-#done
-#printf "\n"
-#sleep 1
-#####################
 
 clear
 #echo "Taking you to the checkout page!"
