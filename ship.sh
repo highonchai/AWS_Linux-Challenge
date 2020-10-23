@@ -1,0 +1,35 @@
+#!/bin/bash
+
+#clear
+
+echo "----------------------------------------------------- "
+echo " SSS   H   H  IIIII  PPPP                                               "
+echo "S   S  H   H    I    P   P                                   "
+echo " S     H   H    I    P   P                   "
+echo "  S    HHHHH    I    P                                          "
+echo "   S   H   H    I    P                                      "
+echo "S   S  H   H    I    P                                      "
+echo " SSS   H   H  IIIII  P                                            "
+echo "----------------------------------------------------- "
+echo "    Our shipping is faster than a speeding bullet!    "
+echo "                                                  "
+echo "                                                      "
+echo "                                                      "
+echo "                                                      "
+echo "                                                      "
+echo "                                                      "
+echo "                                                      "
+echo "                                                      "
+echo "                                                      "
+echo "                                                      "
+echo "                                                      "
+echo "                                                      "
+echo "                                                      "
+echo "                                                      "
+echo "                                                      "
+echo "                                                      "
+echo "                                                      "
+echo "                                                      "
+echo "::::::::::::::::::::::::::::::::::::::::::::::::::::::"
+sleep 3
+

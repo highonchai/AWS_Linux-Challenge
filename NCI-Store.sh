@@ -74,12 +74,12 @@ echo "------------------------------  CHECKOUT  -------------------------------"
 len=${#cart_products[@]}
 for ((n=0; n<$len; n++));
 do
-echo "${cart_products[$n]} -- ${cart_quantity[$n]} ............................${cart_price[$n]}"
+echo "${cart_products[$n]} -- ${cart_quantity[$n]} .......................................................$ ${cart_price[$n]}.00"
 echo " "
 done 
 echo " "
 echo "------------------------------- SUBTOTAL --------------------------------"
-echo "                                                                 subtotal"
+echo "                                                                 $sub_total"
 echo " "
 echo " (Shipping chose)  ...............................................  shipping"
 echo " "
@@ -170,11 +170,16 @@ then
 cart_products=(${cart_products[@]} ${products[$x]}) 
 cart_quantity=(${cart_quantity[@]} ${quant[$x]})
 cart_price=(${cart_price[@]} ${prices[$x]})
+sub_total=(${cart_price[@]/%/+})
+
 x=`expr $x + 1` #increments counter to index correctly when adding to array
 else
 x=`expr $x + 1` #increments counter to index correctly when adding to array
 fi
 done
+
+
+
 
 #### TO BE DELETED. USED FOR TESTING. VERIFIES CART ARRAYS
 for n in "${cart_products[@]}"; do
