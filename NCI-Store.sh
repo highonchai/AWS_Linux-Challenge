@@ -103,10 +103,8 @@ echo "                                                            $ $sub_total"
 echo " "
 echo " (Shipping Rate)  ............................................... $ 3.00"
 echo " "
-echo " (Promo Code: 10% off) ................................................-$ $promo_discount"
-echo " "
 echo "-------------------------------- TOTAL ----------------------------------"
-echo "                    TOTAL= $ $promo_total                   "
+echo "                    TOTAL= $ $total                   "
 echo " "
 echo " "
 }
@@ -159,16 +157,16 @@ cart[4]=1
 ;;
 esac
 
-for n in "${cart[@]}"; do
-printf "$n "
-done
-printf "\n"
+#for n in "${cart[@]}"; do
+#printf "$n "
+#done
+#printf "\n"
 
-for n in "${quant[@]}"; do
-printf "$n "
-done
-printf "\n"
-sleep 1
+#for n in "${quant[@]}"; do
+#printf "$n "
+#done
+#printf "\n"
+#sleep 1
 
 echo "$quantity ${products[$(($product - 1))]} added to your cart"
 sleep 0.25

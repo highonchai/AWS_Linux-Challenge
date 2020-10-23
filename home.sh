@@ -27,7 +27,7 @@ echo "*                    ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⠛⠻⠿⠿⠿⠿⠛  
 printf "\33[33m"
 echo "------------------WELCOME TO YOUR NCI FARMERS' MARKET-------------------"
 echo ""
-#sleep 2
+sleep 2
 echo ""
 printf "\33[34m"
 echo "------------------------------WHO ARE WE?-------------------------------"
@@ -40,7 +40,7 @@ echo "coming in a variety of choices. From the beginning of our existence,"
 echo "we have never treated any of our products with pesticides. Growing"
 echo "everything organically is our mission to bring you the best quality"
 echo "of produce."
-#sleep 10
+sleep 10
 echo ""
 echo "Here are the choices of products you can select from:"
 echo ""
@@ -53,7 +53,7 @@ echo "2) Beans"
 echo "3) Potatoes"
 echo "4) Tomatoes"
 echo "5) Corn"
-#sleep 2
+sleep 2
 echo ""
 echo ""
 echo "ALL CUSTOMERS HAVE THE OPPORTUNITY OF JOINING OUR MEMERSHIP PROGRAM:"
